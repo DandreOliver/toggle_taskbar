@@ -1,0 +1,16 @@
+#include <windows.h>
+
+int main() {
+  HWND taskbar = FindWindow("Shell_TrayWnd", NULL);
+  if (!taskbar)
+    return 1;
+
+  if (IsWindowVisible(taskbar)) {
+    ShowWindow(taskbar, SW_HIDE);
+  } else {
+    ShowWindow(taskbar, SW_SHOW);
+    ShowWindow(taskbar, SW_RESTORE); // fixes redraw issues
+  }
+
+  return 0;
+}
